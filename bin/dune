@@ -1,4 +1,4 @@
 (executable
  (public_name ocaml_json_schema)
  (name main)
- (libraries ocaml_json_schema))
+ (libraries ocaml_json_schema yojson cmdliner))
