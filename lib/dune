@@ -1,3 +1,4 @@
 (library
  (name ocaml_json_schema)
- (libraries yojson))
+ (libraries yojson ppx_deriving.show)
+ (preprocess (pps ppx_deriving.show)))
