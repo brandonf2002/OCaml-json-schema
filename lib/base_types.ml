@@ -1,9 +1,9 @@
 (* Definitions section *)
 type simpleTypes = [`Array | `Boolean | `Integer | `Null | `Number | `Object | `String]
 type nonNegativeInteger = int  (* Constrained to be >= 0 in logic *)
-type nonNegativeIntegerDefault0 = int  (* Constrained to be >= 0 in logic, with default 0 *)
 type stringArray = string list  (* Constrained to have unique elements *)
 type schemaArray = json_schema list  (* This will refer to the main json_schema type, defined later *)
+and nonNegativeIntegerDefault0 = int  (* Constrained to be >= 0 in logic, with default 0 *)
 
 and json_schema = {
   id : string option;  (* URI Reference *)
@@ -12,7 +12,7 @@ and json_schema = {
   comment : string option;
   title : string option;
   description : string option;
-  default : bool;
+  default : Yojson.Safe.t option;
   readOnly : bool;
   writeOnly : bool;
   examples : Yojson.Safe.t list;  (* Any JSON type could be an example *)
@@ -39,7 +39,7 @@ and json_schema = {
   patternProperties : (string, json_schema) Hashtbl.t;  (* Regex as key, default to empty hash table *)
   dependencies : (string, [`Schema of json_schema | `StringArray of stringArray]) Hashtbl.t;
   propertyNames : json_schema option;
-  const : bool;
+  const : Yojson.Safe.t option;
   enum : (Yojson.Safe.t list) option;
   type_field : [`SimpleTypes of simpleTypes | `ArraySimpleTypes of simpleTypes list] option;
   format : string option;
@@ -53,4 +53,3 @@ and json_schema = {
   oneOf : schemaArray option;
   not_field : json_schema option;
 }
-
