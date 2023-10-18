@@ -73,6 +73,7 @@ let rec parse_json_schema (json: Yojson.Safe.t): json_schema =
   let get_opt_json_schema field json =
     match Yojson.Safe.Util.member field json with
   | `Assoc _ as j -> Some (parse_json_schema j)
+  | `Bool _ as j -> Some (parse_json_schema j)
   | `Null -> None
   | _ -> failwith (Printf.sprintf "Expected object or null for field %s" field)
   in

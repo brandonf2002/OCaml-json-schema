@@ -73,11 +73,6 @@ let pp_to_string pp_val v =
 let rec pp_json_schema fmt ?(indent=0) (json_schema: json_schema) =
   let pp_json_schema_ fmt ~indent (json_schema: json_schema_) =
     let ind = String.make (2 * indent) ' ' in
-    (* let pp_option pp_val fmt = function *)
-    (*   (1* | None -> fprintf fmt "None" *1) *)
-    (*   | None -> () *)
-    (*   | Some v -> fprintf fmt "Some (%a)" pp_val v *)
-    (* in *)
 
     let pp_string fmt s = fprintf fmt "%S" s in
     (* let pp_int fmt i = fprintf fmt "%d" i in *)
@@ -85,9 +80,9 @@ let rec pp_json_schema fmt ?(indent=0) (json_schema: json_schema) =
     let pp_list pp_val fmt lst =
       fprintf fmt "[";
       List.iteri (fun i v ->
-          if i > 0 then fprintf fmt "";
+          if i > 0 then fprintf fmt " ";
           pp_val fmt v) lst;
-      fprintf fmt "%s]" ind
+      fprintf fmt "]"
     in
     let pp_hashtbl pp_val fmt tbl =
       fprintf fmt "{\n";
@@ -118,11 +113,11 @@ let rec pp_json_schema fmt ?(indent=0) (json_schema: json_schema) =
     let pp_line_opt field pp_val value =
       match value with
       | None -> ()
-      | Some v -> fprintf fmt "%s%s: %a\n" ind field pp_val v
+      | Some v -> fprintf fmt "%s%S: %a\n" ind field pp_val v
     in
 
     let pp_line field pp_val value =
-      fprintf fmt "%s%s: %a\n" ind field pp_val value
+      fprintf fmt "%s%S: %a\n" ind field pp_val value
     in
 
     fprintf fmt "{\n";
