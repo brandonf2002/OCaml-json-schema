@@ -1,5 +1,4 @@
 open Printf
-(* open Ocaml_json_schema.Json_parser *)
 
 let json_file = ref ""
 let output_file = ref None
@@ -10,12 +9,10 @@ let specs = [
 ]
 
 let process_json json =
-  (* Your JSON processing code here *)
-  (* "Successfully parsed JSON file" (1* Replace with your actual output *1) *)
-  (* Yojson.Safe.pretty_to_string json *)
-  Ocaml_json_schema.Base_types.pp_to_string (Ocaml_json_schema.Base_types.pp_json_schema ~indent:0) (Ocaml_json_schema.Json_parser.parse_json_schema json)
+  (* Ocaml_json_schema.Base_types.pp_to_string (Ocaml_json_schema.Base_types.pp_json_schema ~indent:0) (Ocaml_json_schema.Json_parser.parse_json_schema json) *)
+  Ocaml_json_schema.Generate_types.json_schema_to_ocaml_type "Hello" (Ocaml_json_schema.Json_parser.parse_json_schema json)
 
-let () =
+let _ =
   Arg.parse specs (fun _ -> ()) "Usage: prog_name --json [json_file_path] [--output output_file_path]";
 
   if !json_file = "" then (
@@ -39,3 +36,4 @@ let () =
   | Sys_error msg ->
     printf "Could not read file: %s\n" msg;
     exit 1
+

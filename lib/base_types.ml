@@ -57,8 +57,7 @@ and json_schema_ = {
   anyOf : schemaArray option;
   oneOf : schemaArray option;
   not_field : json_schema option;
-} 
-
+}
 
 open Format
 

@@ -1,5 +1,23 @@
 open Base_types
 
+(* module StringHash = Hashtbl.Make(String) *)
+
+(* let schema_references = StringHash.create 50 *)
+
+(* let rec populate_references schema = *)
+(*   match schema with *)
+(*   | Bool _ -> () *)
+(*   | Schema s -> *)
+(*     (match s.id with *)
+(*      | Some id -> StringHash.add schema_references id schema *)
+(*      | None -> ()); *)
+(*     (match s.id with *)
+(*      | Some id -> StringHash.add schema_references id schema *)
+(*      | None -> ()); *)
+(*     (1* ... walk through other fields that may contain nested schemas *)
+(*        and call populate_references recursively on them ... *1) *)
+(*     () *)
+
 let parse_nonNegativeInteger i : Base_types.nonNegativeInteger =
   if i >= 0 then i 
   else failwith "Invalid nonNegativeInteger"
